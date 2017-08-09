@@ -1,162 +1,165 @@
 APACHE HTTP SERVER
 
-Core Enhancements
 
-Run-time Loadable MPMs
-Multiple MPMs can now be built as loadable modules at compile time. The MPM of choice can be configured at run time via LoadModule directive.
-Event MPM
-The Event MPM is no longer experimental but is now fully supported.
-Asynchronous support
-Better support for asynchronous read/write for supporting MPMs and platforms.
-Per-module and per-directory LogLevel configuration
-The LogLevel can now be configured per module and per directory. New levels trace1 to trace8 have been added above the debug log level.
-Per-request configuration sections
-<If>, <ElseIf>, and <Else> sections can be used to set the configuration based on per-request criteria.
-General-purpose expression parser
-A new expression parser allows to specify complex conditions using a common syntax in directives like SetEnvIfExpr, RewriteCond, Header, <If>, and others.
-KeepAliveTimeout in milliseconds
-It is now possible to specify KeepAliveTimeout in milliseconds.
-NameVirtualHost directive
-No longer needed and is now deprecated.
-Override Configuration
-The new AllowOverrideList directive allows more fine grained control which directives are allowed in .htaccess files.
-Config file variables
-It is now possible to Define variables in the configuration, allowing a clearer representation if the same value is used at many places in the configuration.
-Reduced memory usage
-Despite many new features, 2.4.x tends to use less memory than 2.2.x.
-top
-New Modules
+Aprimoramentos do núcleo
+
+MPMs de carga em tempo de execução
+Múltiplos MPMs agora podem ser criados como módulos carregáveis em tempo de compilação. O MPM de escolha pode ser configurado em tempo de execução via LoadModulediretiva.
+Evento MPM
+O Event MPM não é mais experimental, mas agora é totalmente suportado.
+Suporte assíncrono
+Melhor suporte para leitura / gravação assíncrona para suporte de MPMs e plataformas.
+Configuração LogLevel por módulo e por diretório
+O LogLevelagora pode ser configurado por módulo e por diretório. Novos níveis trace1 de trace8foram adicionados acima do debugnível de log.
+Seções de configuração por solicitação
+<If>, <ElseIf>E as <Else> seções podem ser usadas para configurar a configuração com base em critérios por solicitação.
+Analisador de expressão de propósito geral
+Um novo analisador de expressão permite especificar condições complexas usando uma sintaxe comum em directivas como SetEnvIfExpr, RewriteCond, Header, <If>, e outros.
+KeepAliveTimeout em milissegundos
+Agora é possível especificar KeepAliveTimeoutem milissegundos.
+Diretriz NameVirtualHost
+Não é mais necessário e agora está obsoleto.
+Substituir a Configuração
+A nova AllowOverrideList diretiva permite um controle mais fino que as diretivas são permitidas nos .htaccessarquivos.
+Variáveis ​​do arquivo de configuração
+Agora é possível as Define variáveis ​​na configuração, permitindo uma representação mais clara se o mesmo valor for usado em muitos lugares na configuração.
+Redução de uso de memória
+Apesar de muitos novos recursos, 2.4.x tende a usar menos memória do que 2.2.x.
+topo
+Novos Módulos
 
 mod_proxy_fcgi
-FastCGI Protocol backend for mod_proxy
+Fastend do protocolo FastCGI para mod_proxy
 mod_proxy_scgi
-SCGI Protocol backend for mod_proxy
+Protocolo de protocolo SCGI para mod_proxy
 mod_proxy_express
-Provides dynamically configured mass reverse proxies for mod_proxy
+Fornece proxies reversos de massa dinamicamente configurados para mod_proxy
 mod_remoteip
-Replaces the apparent client remote IP address and hostname for the request with the IP address list presented by a proxies or a load balancer via the request headers.
+Substitui o aparente endereço IP remoto e o nome do host para a solicitação com a lista de endereços IP apresentada por um proxies ou um balanceador de carga por meio dos cabeçalhos das solicitações.
 mod_heartmonitor, mod_lbmethod_heartbeat
-Allow mod_proxy_balancer to base loadbalancing decisions on the number of active connections on the backend servers.
+Permita mod_proxy_balancerbasear decisões de balanceamento de carga no número de conexões ativas nos servidores backend.
 mod_proxy_html
-Formerly a third-party module, this supports fixing of HTML links in a reverse proxy situation, where the backend generates URLs that are not valid for the proxy's clients.
+Anteriormente, um módulo de terceiros, isso suporta a fixação de links HTML em uma situação de proxy reverso, onde o backend gera URLs que não são válidos para os clientes do proxy.
 mod_sed
-An advanced replacement of mod_substitute, allows to edit the response body with the full power of sed.
+Uma substituição avançada de mod_substitute, permite editar o corpo de resposta com o poder total de sed.
 mod_auth_form
-Enables form-based authentication.
+Permite a autenticação baseada em formulários.
 mod_session
-Enables the use of session state for clients, using cookie or database storage.
+Permite o uso do estado da sessão para clientes, usando armazenamento de cookies ou banco de dados.
 mod_allowmethods
-New module to restrict certain HTTP methods without interfering with authentication or authorization.
+Novo módulo para restringir determinados métodos HTTP sem interferir com autenticação ou autorização.
 mod_lua
-Embeds the Lua language into httpd, for configuration and small business logic functions. (Experimental)
+Incorpora o idioma Lua em httpd, para funções de configuração e lógica de pequenas empresas. (Experimental)
 mod_log_debug
-Allows the addition of customizable debug logging at different phases of the request processing.
+Permite a adição de log de depuração personalizável em diferentes fases do processamento da solicitação.
 mod_buffer
-Provides for buffering the input and output filter stacks
+Fornece armazenamento em buffer das pilhas de filtro de entrada e saída
 mod_data
-Convert response body into an RFC2397 data URL
+Converta o corpo da resposta em um URL de dados RFC2397
 mod_ratelimit
-Provides Bandwidth Rate Limiting for Clients
+Fornece Limitação de Taxa de Banda Larga para Clientes
 mod_request
-Provides Filters to handle and make available HTTP request bodies
+Fornece filtros para lidar e disponibilizar os organismos de solicitação HTTP
 mod_reflector
-Provides Reflection of a request body as a response via the output filter stack.
+Fornece Reflexão de um corpo de solicitação como uma resposta através da pilha de filtro de saída.
 mod_slotmem_shm
-Provides a Slot-based shared memory provider (ala the scoreboard).
+Fornece um provedor de memória compartilhada baseado em slots (ala o painel de avaliação).
 mod_xml2enc
-Formerly a third-party module, this supports internationalisation in libxml2-based (markup-aware) filter modules.
-mod_macro (available since 2.4.5)
-Provide macros within configuration files.
-mod_proxy_wstunnel (available since 2.4.5)
-Support web-socket tunnels.
-mod_authnz_fcgi (available since 2.4.10)
-Enable FastCGI authorizer applications to authenticate and/or authorize clients.
-mod_http2 (available since 2.4.17)
-Support for the HTTP/2 transport layer.
-mod_proxy_hcheck (available since 2.4.21)
-Support independent dynamic health checks for remote proxiy backend servers.
-top
-Module Enhancements
+Anteriormente, um módulo de terceiros, isso aceita a internacionalização em módulos de filtro baseados em libxml2 (com reconhecimento de marcação).
+mod_macro (Disponível desde 2.4.5)
+Fornecer macros dentro dos arquivos de configuração.
+mod_proxy_wstunnel (Disponível desde 2.4.5)
+Apoio de túneis de conexão web.
+mod_authnz_fcgi (Disponível desde 2.4.10)
+Habilite aplicativos do autorizador FastCGI para autenticar e / ou autorizar clientes.
+mod_http2 (Disponível desde 2,4.17)
+Suporte para a camada de transporte HTTP / 2.
+mod_proxy_hcheck (Disponível desde 2.4.21)
+Apoie verificações de saúde dinâmicas independentes para servidores de backend de proxiy remotos.
+topo
+Melhorias de módulo
 
 mod_ssl
-mod_ssl can now be configured to use an OCSP server to check the validation status of a client certificate. The default responder is configurable, along with the decision on whether to prefer the responder designated in the client certificate itself.
-mod_ssl now also supports OCSP stapling, where the server pro-actively obtains an OCSP verification of its certificate and transmits that to the client during the handshake.
-mod_ssl can now be configured to share SSL Session data between servers through memcached
-EC keys are now supported in addition to RSA and DSA.
-Support for TLS-SRP (available in 2.4.4 and later).
+mod_sslAgora pode ser configurado para usar um servidor OCSP para verificar o status de validação de um certificado de cliente. O respondedor padrão é configurável, juntamente com a decisão de preferir ou não o respondedor designado no próprio certificado do cliente.
+mod_ssl Agora também suporta grampeamento OCSP, onde o servidor pro-ativamente obtém uma verificação OCSP de seu certificado e transmite isso ao cliente durante o aperto de mão.
+mod_ssl Agora pode ser configurado para compartilhar dados de Sessão SSL entre servidores através do memcached
+As chaves EC agora são suportadas, além de RSA e DSA.
+Suporte para TLS-SRP (disponível em 2.4.4 e posterior).
 mod_proxy
-The ProxyPass directive is now most optimally configured within a Location or LocationMatch block, and offers a significant performance advantage over the traditional two-parameter syntax when present in large numbers.
-The source address used for proxy requests is now configurable.
-Support for Unix domain sockets to the backend (available in 2.4.7 and later).
+A ProxyPassdirectiva agora está configurada de forma otimizada dentro de um bloco Locationou LocationMatch, e oferece uma vantagem de desempenho significativa em relação à sintaxe tradicional de dois parâmetros quando presente em grandes números.
+O endereço de origem usado para solicitações de proxy agora é configurável.
+Suporte para sockets de domínio Unix para o backend (disponível em 2.4.7 e posterior).
 mod_proxy_balancer
-More runtime configuration changes for BalancerMembers via balancer-manager
-Additional BalancerMembers can be added at runtime via balancer-manager
-Runtime configuration of a subset of Balancer parameters
-BalancerMembers can be set to 'Drain' so that they only respond to existing sticky sessions, allowing them to be taken gracefully offline.
-Balancer settings can be persistent after restarts.
+Mais mudanças de configuração de tempo de execução para BalancerMembers via balance-manager
+BalancerMembers adicionais podem ser adicionados em tempo de execução via balance-manager
+Configuração de tempo de execução de um subconjunto de parâmetros Balancer
+BalancerMembers pode ser configurado para 'Drenar' para que eles respondam apenas a sessões adesivas existentes, permitindo que elas sejam aceitas graciosamente offline.
+As configurações do balanceador podem ser persistentes após reiniciar.
 mod_cache
-The mod_cache CACHE filter can be optionally inserted at a given point in the filter chain to provide fine control over caching.
-mod_cache can now cache HEAD requests.
-Where possible, mod_cache directives can now be set per directory, instead of per server.
-The base URL of cached URLs can be customised, so that a cluster of caches can share the same endpoint URL prefix.
-mod_cache is now capable of serving stale cached data when a backend is unavailable (error 5xx).
-mod_cache can now insert HIT/MISS/REVALIDATE into an X-Cache header.
+O mod_cachefiltro CACHE pode ser opcionalmente inserido em um determinado ponto na cadeia do filtro para fornecer um controle fino sobre o armazenamento em cache.
+mod_cache Agora pode armazenar em segredo solicitações HEAD.
+Sempre que possível, as mod_cachediretrizes agora podem ser definidas por diretório, em vez de por servidor.
+O URL base de URLs em cache pode ser personalizado, de modo que um conjunto de caches possa compartilhar o mesmo prefixo de URL do nó de extremidade.
+mod_cache Agora é capaz de fornecer dados em cache obsoletos quando um backend não está disponível (erro 5xx).
+mod_cache Agora pode inserir HIT / MISS / REVALIDATE em um cabeçalho X-Cache.
 mod_include
-Support for the 'onerror' attribute within an 'include' element, allowing an error document to be served on error instead of the default error string.
+Suporte para o atributo 'onerror' dentro de um elemento 'include', permitindo que um documento de erro seja exibido por erro em vez da string de erro padrão.
 mod_cgi, mod_include, mod_isapi, ...
-Translation of headers to environment variables is more strict than before to mitigate some possible cross-site-scripting attacks via header injection. Headers containing invalid characters (including underscores) are now silently dropped. Environment Variables in Apache has some pointers on how to work around broken legacy clients which require such headers. (This affects all modules which use these environment variables.)
-mod_authz_core Authorization Logic Containers
-Advanced authorization logic may now be specified using the Require directive and the related container directives, such as <RequireAll>.
+A tradução de cabeçalhos para variáveis ​​de ambiente é mais rigorosa do que antes para mitigar alguns ataques possíveis de cross-site-scripting via injeção de cabeçalho. Os cabeçalhos que contêm caracteres inválidos (incluindo sublinhados) agora são silenciosamente descartados. As variáveis ​​de ambiente no Apache têm algumas dicas sobre como trabalhar em torno de clientes legados quebrados que exigem esses cabeçalhos. (Isso afeta todos os módulos que usam essas variáveis ​​de ambiente.)
+mod_authz_core Containers de lógica de autorização
+A lógica de autorização avançada agora pode ser especificada usando a Requirediretiva e as diretrizes de contêiner relacionadas, como <RequireAll>.
 mod_rewrite
-mod_rewrite adds the [QSD] (Query String Discard) and [END] flags for RewriteRule to simplify common rewriting scenarios.
-Adds the possibility to use complex boolean expressions in RewriteCond.
-Allows the use of SQL queries as RewriteMap functions.
+mod_rewriteAdiciona o [QSD] (Query String Discard) e as [END]bandeiras para RewriteRulesimplificar cenários comuns de reescrita.
+Adiciona a possibilidade de usar expressões booleanas complexas em RewriteCond.
+Permite o uso de consultas SQL como RewriteMapfunções.
 mod_ldap, mod_authnz_ldap
-mod_authnz_ldap adds support for nested groups.
-mod_ldap adds LDAPConnectionPoolTTL, LDAPTimeout, and other improvements in the handling of timeouts. This is especially useful for setups where a stateful firewall drops idle connections to the LDAP server.
-mod_ldap adds LDAPLibraryDebug to log debug information provided by the used LDAP toolkit.
+mod_authnz_ldap Adiciona suporte para grupos aninhados.
+mod_ldapAcrescenta LDAPConnectionPoolTTL, LDAPTimeoute outras melhorias no tratamento de tempo limite. Isto é especialmente útil para configurações em que um firewall com estado destrói as conexões inativas para o servidor LDAP.
+mod_ldapAdiciona LDAPLibraryDebuginformações de depuração de log fornecidas pelo kit de ferramentas LDAP usado.
 mod_info
-mod_info can now dump the pre-parsed configuration to stdout during server startup.
+mod_info Agora pode despejar a configuração pré-analisada para stdout durante a inicialização do servidor.
 mod_auth_basic
-New generic mechanism to fake basic authentication (available in 2.4.5 and later).
-top
-Program Enhancements
+Novo mecanismo genérico para autenticação básica falsa (disponível em 2.4.5 e posterior).
+topo
+Aprimoramentos de programas
 
 fcgistarter
-New FastCGI daemon starter utility
+Novo FastCGI daemon starter utility
 htcacheclean
-Current cached URLs can now be listed, with optional metadata included.
-Allow explicit deletion of individual cached URLs from the cache.
-File sizes can now be rounded up to the given block size, making the size limits map more closely to the real size on disk.
-Cache size can now be limited by the number of inodes, instead of or in addition to being limited by the size of the files on disk.
+Os URL atualizados em cache agora podem ser listados, com metadados opcionais incluídos.
+Permitir exclusão explícita de URLs em cache individuais do cache.
+Os tamanhos de arquivo agora podem ser arredondados para o tamanho do bloco dado, tornando o tamanho do mapa de limites mais próximo do tamanho real no disco.
+O tamanho do cache agora pode ser limitado pelo número de inodes, em vez de ser limitado pelo tamanho dos arquivos no disco.
 rotatelogs
-May now create a link to the current log file.
-May now invoke a custom post-rotate script.
+Agora, você pode criar um link para o arquivo de log atual.
+Agora, pode invocar um script personalizado pós-rotação.
 htpasswd, htdbm
-Support for the bcrypt algorithm (available in 2.4.4 and later).
-top
-Documentation
+Suporte para o algoritmo bcrypt (disponível em 2.4.4 e posterior).
+topo
+Documentação
 
-mod_rewrite
-The mod_rewrite documentation has been rearranged and almost completely rewritten, with a focus on examples and common usage, as well as on showing you when other solutions are more appropriate. The Rewrite Guide is now a top-level section with much more detail and better organization.
-mod_ssl
-The mod_ssl documentation has been greatly enhanced, with more examples at the getting started level, in addition to the previous focus on technical details.
-Caching Guide
-The Caching Guide has been rewritten to properly distinguish between the RFC2616 HTTP/1.1 caching features provided by mod_cache, and the generic key/value caching provided by the socache interface, as well as to cover specialised caching provided by mechanisms such as mod_file_cache.
-top
-Module Developer Changes
+Mod_rewrite
+A mod_rewritedocumentação foi reorganizada e quase completamente reescrita, com foco em exemplos e uso comum, além de mostrar quando outras soluções são mais apropriadas. O Reescrever Guia é agora uma seção de alto nível com muito mais detalhes e melhor organização.
+Mod_ssl
+A mod_ssldocumentação foi grandemente aprimorada, com mais exemplos no nível de inicialização, além do foco anterior nos detalhes técnicos.
+Guia de armazenamento em cache
+O Guia de armazenamento em cache foi reescrito para distinguir adequadamente os recursos de cache RFC2616 HTTP / 1.1 fornecidos pelo cache de mod_cachechave / valor genérico fornecido pela interface socache , bem como para cobrir caches especializados fornecidos por mecanismos como mod_file_cache.
+topo
+Alterações do desenvolvedor de módulos
 
-Check Configuration Hook Added
-A new hook, check_config, has been added which runs between the pre_config and open_logs hooks. It also runs before the test_config hook when the -t option is passed to httpd. The check_config hook allows modules to review interdependent configuration directive values and adjust them while messages can still be logged to the console. The user can thus be alerted to misconfiguration problems before the core open_logs hook function redirects console output to the error log.
-Expression Parser Added
-We now have a general-purpose expression parser, whose API is exposed in ap_expr.h. This is adapted from the expression parser previously implemented in mod_ssl.
-Authorization Logic Containers
-Authorization modules now register as a provider, via ap_register_auth_provider(), to support advanced authorization logic, such as <RequireAll>.
-Small-Object Caching Interface
-The ap_socache.h header exposes a provider-based interface for caching small data objects, based on the previous implementation of the mod_ssl session cache. Providers using a shared-memory cyclic buffer, disk-based dbm files, and a memcache distributed cache are currently supported.
-Cache Status Hook Added
-The mod_cache module now includes a new cache_status hook, which is called when the caching decision becomes known. A default implementation is provided which adds an optional X-Cache and X-Cache-Detail header to the response.
-The developer documentation contains a detailed list of API changes.
+Check Configuration Hook Adicionado
+Foi adicionado um novo gancho, check_configque é executado entre os ganchos pre_confige open_logs. Ele também é executado antes do test_configgancho quando a -topção é passada httpd. O check_configgancho permite aos módulos rever os valores interdependentes da diretiva de configuração e ajustá-los enquanto as mensagens ainda podem ser logadas no console. O usuário pode, portanto, ser alertado de problemas de configuração errada antes que a open_logsfunção de gancho do núcleo redirecione a saída do console para o log de erros.
+Expression Parser Adicionado
+Agora temos um analisador de expressão de propósito geral, cuja API está exposta em ap_expr.h . Isso é adaptado do analisador de expressão implementado anteriormente em mod_ssl.
+Containers de lógica de autorização
+Os módulos de autorização agora se registram como um provedor, via ap_register_auth_provider (), para suportar a lógica de autorização avançada, como <RequireAll>.
+Interface de cache de objetos pequenos
+O cabeçalho ap_socache.h expõe uma interface baseada em provedor para armazenamento em cache de pequenos objetos de dados, com base na implementação anterior do mod_sslcache da sessão. Os provedores que usam um buffer cíclico de memória compartilhada, arquivos dbm baseados no disco e um cache distribuído com memcache são atualmente suportados.
+Cache Status Hook Adicionado
+O mod_cachemódulo agora inclui um novo cache_statusgancho, que é chamado quando a decisão de cache é conhecida. É fornecida uma implementação padrão que adiciona um opcional X-Cachee um X-Cache-Detailcabeçalho à resposta.
+A documentação do desenvolvedor contém uma lista detalhada de mudanças na API .
+
+
 
 nginx 
 
